@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiProjectBNews.Views.ArticleView">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Button Text="Refresh" Clicked="Button_Clicked"/>
+            <Label Text="Todays headlines" HorizontalOptions="Center" FontSize="Header" />
+            <WebView Source="{Binding .}" />
+            <ListView x:Name="GroupedNews" IsGroupingEnabled="true" HasUnevenRows="true" ItemTapped="GroupedNews_ItemTapped">
+
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell />
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <StackLayout Orientation="Horizontal" Padding="5" NavigationPage.TitleIconImageSource="{Binding Url}">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding Image.Thumbnail.ContentUrl}" WidthRequest="70" HeightRequest="70"/>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding DatePublished, StringFormat='{0:dd}th {0:MMMM yyyy HH:mm}'}"/>
+                                        <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Description}" FontSize="Body"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
